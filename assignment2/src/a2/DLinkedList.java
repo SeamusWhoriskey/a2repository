@@ -121,6 +121,20 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Note that there are two ways to get to a node: from the head or from the tail.
         // This MUST use the fastest way for index.
         // (If h is exactly the middle, then either way is ok.)
+    	
+    	// Initialization of useful variable irev (used to determine which end node is closer to)
+    	int irev = size - index;
+    	
+    	// Assertion that there is a node in DLL of index index.
+    	if (irev < 0){ 				
+    		throw new IndexOutOfBoundsException();
+    	} 
+    	
+    	if (irev > index) {  		// If index is closer to head, start from head
+    		
+    	} else { 					// Else, start from tail
+    		
+    	}
         throw new NotImplementedError();
     }
     
