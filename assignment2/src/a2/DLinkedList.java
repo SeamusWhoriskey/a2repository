@@ -31,10 +31,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
      * This operation must take constant time.
      */
     public @Override int size() {
-        // TODO item #2
-        // This is an extremely small method
-//    	return this.dll.length;
-        throw new NotImplementedError();
+    	return dll.size();
     }
 
     /**
