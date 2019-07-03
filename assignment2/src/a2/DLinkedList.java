@@ -2,7 +2,6 @@ package a2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,8 +21,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private Node tail;
     
     /** Constructor: an empty linked list. */
+    DLinkedList<E> dll;
     public DLinkedList() {
-    	LinkedList<E> dll = new LinkedList<E>();
+    	dll = new DLinkedList<E>();
     }
 
     /**
@@ -33,6 +33,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     public @Override int size() {
         // TODO item #2
         // This is an extremely small method
+//    	return this.dll.length;
         throw new NotImplementedError();
     }
 
