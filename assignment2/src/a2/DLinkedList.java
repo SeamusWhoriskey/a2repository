@@ -2,6 +2,7 @@ package a2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,9 +23,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     
     /** Constructor: an empty linked list. */
     public DLinkedList() {
-        // TODO item #1
-        // Look at the class invariant to determine how to implement this.
-        throw new NotImplementedError();
+    	LinkedList<E> dll = new LinkedList<E>();
     }
 
     /**
