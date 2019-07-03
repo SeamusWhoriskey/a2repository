@@ -21,7 +21,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private Node tail;
     
     /** Constructor: an empty linked list. */
-    DLinkedList<E> dll;
+    private DLinkedList<E> dll;
     public DLinkedList() {
     	dll = new DLinkedList<E>();
     }
@@ -61,10 +61,15 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
      * For example, if this contains 6 3 8 in that order, the result is "[8, 3, 6]".
      */
     public String toStringRev() {
-        // TODO item #3
-        // This should use field tail and the pred fields in nodes.
-        // Do NOT use field size.
-        throw new NotImplementedError();
+    	String res= "[";
+        // invariant: res = "[s0, s1, .., sk" where sk is the object after node n
+        for (Node n = tail; n != null; n= n.pred) {
+            if (n != tail)
+                res= res + ", ";
+            res= res + n.data;
+            n= n.pred;
+        }
+        return res + "]";
     }
     
     /**
