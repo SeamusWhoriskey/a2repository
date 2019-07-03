@@ -79,7 +79,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private Node append(E element) {
         // TODO item #4
         // This mid-size helper function will be used by other methods
-        throw new NotImplementedError();
+    	
+    	dll.add(element);
+    	return dll.getNode(this.size);
     }
     
     /** Append element to the end of this list and return true. */
