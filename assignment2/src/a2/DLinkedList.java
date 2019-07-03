@@ -80,8 +80,18 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // TODO item #4
         // This mid-size helper function will be used by other methods
     	
-    	dll.add(element);
-    	return dll.getNode(this.size);
+    	// Initializes the new tail as new_tail
+    	Node new_tail = null;
+    	// Sets new_tail's data to element
+    	new_tail.data = element;
+    	// Sets the successor of the old tail to be the new tail
+    	this.tail.succ = new_tail;
+    	// Sets the predecessor of the new tail to be the old tail
+    	new_tail.pred = this.tail;
+    	// Sets the tail of the DLL as the new tail
+    	this.tail = new_tail;
+    	
+    	return new_tail;
     }
     
     /** Append element to the end of this list and return true. */
