@@ -100,7 +100,10 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small
         // This is THE MOST IMPORTANT method to get right because it will be used
         // in nearly every test
-        throw new NotImplementedError();
+    	
+    	// Use append() method to add element to the end of this list
+    	dll.append(element);
+        return true;
     }
     
     /**
