@@ -21,9 +21,10 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private Node tail;
     
     /** Constructor: an empty linked list. */
-    private DLinkedList<E> dll;
     public DLinkedList() {
-    	dll = new DLinkedList<E>();
+    	this.size = 0;
+    	this.head = null;
+    	this.tail = null;
     }
 
     /**
@@ -31,7 +32,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
      * This operation must take constant time.
      */
     public @Override int size() {
-    	return dll.size();
+    	return this.size;
     }
 
     /**
@@ -227,7 +228,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
     	
-        throw new NotImplementedError();
+    	Node node_after = getNode(index);
+    	insertBefore(element, node_after);
+
     }
     
     /**
@@ -239,6 +242,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private E removeNode(Node n) {
         // TODO item #12
         // This is a large helper method
+    	
         throw new NotImplementedError();
     }
     
