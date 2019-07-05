@@ -48,7 +48,6 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
             if (n != head)
                 res= res + ", ";
             res= res + n.data;
-            n= n.succ;
         }
         return res + "]";
     }
@@ -67,7 +66,6 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
             if (n != tail)
                 res= res + ", ";
             res= res + n.data;
-            n= n.pred;
         }
         return res + "]";
     }
