@@ -78,16 +78,12 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // TODO item #4
         // This mid-size helper function will be used by other methods
     	
-    	// Initializes the new tail as new_tail
-    	Node new_tail = null;
-    	// Sets new_tail's data to element
-    	new_tail.data = element;
+    	// Initializes the new tail as new_tail with this.tail as the predecessor, data of element e,  and no successor.
+    	Node new_tail = new Node(this.tail, element, null);
     	// Sets the successor of the old tail to be the new tail
     	this.tail.succ = new_tail;
-    	// Sets the predecessor of the new tail to be the old tail
-    	new_tail.pred = this.tail;
-    	// Sets the tail of the DLL as the new tail
-    	this.tail = new_tail;
+    	// Sets the head of the DLL as the new head
+    	this.head = new_tail;
     	
     	return new_tail;
     }
@@ -185,14 +181,10 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // TODO item #9
         // This mid-size helper function will be used by other methods
     	
-    	// Initializes the new head as new_head
-    	Node new_head = null;
-    	// Sets new_head's data to element
-    	new_head.data = element;
+    	// Initializes the new head as new_head with no predecessor, data of element e, and successor being the current head.
+    	Node new_head = new Node(null, element, this.head);
     	// Sets the predecessor of the old head to be the new head
     	this.head.pred = new_head;
-    	// Sets the successor of the new head to be the old head
-    	new_head.succ = this.head;
     	// Sets the head of the DLL as the new head
     	this.head = new_head;
     	
@@ -212,7 +204,10 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Do NOT test whether node is actually a Node of this list because
         // it will then not be a constant-time operation.
     	assert node != null;
-    	node.data = element;
+    	Node node_before = node.pred;
+    	Node new_node = new Node(node_before, element, node);
+    	node_before.succ = new_node;
+    	node.pred = new_node;
     	return node;
     }
     
@@ -231,6 +226,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small.
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
+    	
         throw new NotImplementedError();
     }
     
