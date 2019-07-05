@@ -224,6 +224,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	Node new_node = new Node(node_before, element, node);
     	node_before.succ = new_node;
     	node.pred = new_node;
+    	this.size += 1;
     	return node;
     }
     
