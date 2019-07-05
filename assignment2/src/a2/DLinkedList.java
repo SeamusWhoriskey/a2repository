@@ -184,7 +184,19 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private Node prepend(E element) {
         // TODO item #9
         // This mid-size helper function will be used by other methods
-        throw new NotImplementedError();
+    	
+    	// Initializes the new head as new_head
+    	Node new_head = null;
+    	// Sets new_head's data to element
+    	new_head.data = element;
+    	// Sets the predecessor of the old head to be the new head
+    	this.head.pred = new_head;
+    	// Sets the successor of the new head to be the old head
+    	new_head.succ = this.head;
+    	// Sets the head of the DLL as the new head
+    	this.head = new_head;
+    	
+    	return new_head;
     }
     
     /**
