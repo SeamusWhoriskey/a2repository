@@ -82,8 +82,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	Node new_tail = new Node(this.tail, element, null);
     	// Sets the successor of the old tail to be the new tail
     	this.tail.succ = new_tail;
-    	// Sets the head of the DLL as the new head
-    	this.head = new_tail;
+    	// Sets the tail of the DLL as the new tail
+    	this.tail = new_tail;
     	
     	return new_tail;
     }
