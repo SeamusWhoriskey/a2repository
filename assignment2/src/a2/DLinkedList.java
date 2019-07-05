@@ -171,7 +171,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small.
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
-        throw new NotImplementedError();
+    	E out = getNode(index).data;
+    	getNode(index).data = element;
+    	return out;
     }
     
     /**
