@@ -81,11 +81,19 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	
     	// Initializes the new tail as new_tail with this.tail as the predecessor, data of element e,  and no successor.
     	Node new_tail = new Node(this.tail, element, null);
-    	// Sets the successor of the old tail to be the new tail
-    	this.tail.succ = new_tail;
+    	
+    	if (this.size == 0) { 		// If the DLL is empty;
+    		// Set this DLL's head to be the new_tail
+    		this.head = new_tail;
+    	} else {
+    		// Sets the successor of the old tail to be the new tail
+        	this.tail.succ = new_tail;
+    	}
+    	
     	// Sets the tail of the DLL as the new tail
     	this.tail = new_tail;
-    	
+    	// Increases the size of the DLL by 1.
+    	this.size += 1;
     	return new_tail;
     }
     
@@ -97,7 +105,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // in nearly every test
     	
     	// Use append() method to add element to the end of this list
-    	dll.append(element);
+    	append(element);
         return true;
     }
     
@@ -184,11 +192,18 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	
     	// Initializes the new head as new_head with no predecessor, data of element e, and successor being the current head.
     	Node new_head = new Node(null, element, this.head);
+    	
+    	if (this.size == 0) { 		// If the DLL is empty;
+    		// Set this DLL's tail to be new_head as well
+    		this.tail = new_head;
+    	}
     	// Sets the predecessor of the old head to be the new head
     	this.head.pred = new_head;
     	// Sets the head of the DLL as the new head
     	this.head = new_head;
     	
+    	// Increases the size of the DLL by 1;
+    	this.size += 1;
     	return new_head;
     }
     
