@@ -127,11 +127,15 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	if (irev < 0){ 				
     		throw new IndexOutOfBoundsException();
     	} 
-    	
+    	Node n = this.head;
     	if (irev > index) {  		// If index is closer to head, start from head
-    		
+    		for (int j = 0; j < index; j++) {
+    			n = n.succ;
+    		}
     	} else { 					// Else, start from tail
-    		
+			for (int j = 0; j < irev; j++) {
+    			n = n.pred;
+    		}
     	}
         throw new NotImplementedError();
     }
