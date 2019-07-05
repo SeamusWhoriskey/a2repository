@@ -344,5 +344,14 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
             dll.add(4); ll.add(4);
             assertEquals(dll.toString(), ll.toString());
         }
+        
+        /** Testing toStringRev method */
+        @Test
+        public void testToStringRev() {
+            DLinkedList<Integer> dll = new DLinkedList<Integer>();
+            dll.add(4); 
+            dll.add(5);
+            assertEquals(dll.toStringRev(), "[5, 4]");
+        }
     }
 }
