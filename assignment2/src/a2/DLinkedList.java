@@ -137,7 +137,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     			n = n.pred;
     		}
     	}
-        throw new NotImplementedError();
+        return n;
     }
     
     /**
