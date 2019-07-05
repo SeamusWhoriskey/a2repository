@@ -126,7 +126,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // (If h is exactly the middle, then either way is ok.)
     	
     	// Initialization of useful variable irev (used to determine which end node is closer to)
-    	int irev = size - index;
+    	int irev = size - index - 1;
     	
     	// Assertion that there is a node in DLL of index index.
     	if (irev < 0){ 				
@@ -352,6 +352,33 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
             dll.add(4); 
             dll.add(5);
             assertEquals(dll.toStringRev(), "[5, 4]");
+        }
+        
+        /** Testing get method */
+        @Test
+        public void testGet() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	dll.add(4);
+        	assertEquals(dll.get(0), 4);
+        	try {
+        		dll.get(1);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("testGet index out of range");
+        	}
+        }
+        
+        /** Testing the set method */
+        @Test
+        public void testSet() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	dll.add(4);
+        	dll.set(0,8);
+        	assertEquals(dll.get(0), 8);
+        	try {
+        		dll.set(1,2);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("testSet index out of range");
+        	}
         }
     }
 }
