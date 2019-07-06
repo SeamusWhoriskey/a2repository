@@ -258,8 +258,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private E removeNode(Node n) {
         // TODO item #12
         // This is a large helper method
-    	
-        throw new NotImplementedError();
+        throw new NotImplementedError();  	    	
     }
     
     /**
@@ -380,5 +379,57 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         		System.out.println("testSet index out of range");
         	}
         }
+ 
+        /** Testing the add method */
+        @Test
+        public void testadd() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	//Add one number to the DLinkedList
+        	dll.add(3);
+        	//Assert that adding a 3 to an empty DLinkedList returns [3] 
+        	assertEquals(dll, "[3]");
+        	//Check if add will extend the DLinkedList as specified
+        	dll.add(9);
+        	dll.add(11);
+        	assertEquals(dll, "[3, 9, 11]");
+        }        
+        
+        /** Testing the prepend method */
+        @Test
+        public void testprepend() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	//Add some indexes to the DLinkedList
+        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	//Assert that putting a 4 in front of the DLinkedList will return [4, 3, 9, -4, 7]
+        	assertEquals(dll.prepend(4), "[4, 3, 9, -4, 7]");
+        	//Try-catch to test error cases
+        	try {
+        		dll = null;
+        		dll.prepend(-1);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("testprepend index out of range");
+        	}
+        }
+        
+        /** Testing the insertBefore method */
+        @Test
+        public void testinsertBefore() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	//Add some indexes to the DLinkedList
+        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	//Assert that putting a 5 before index 3 will return [3, 9, -4, 5, 7] 
+        	System.out.println(dll);
+        	//assertEquals(dll.insertBefore(3), "[3, 9, -4, 5, 7]");
+        	//Try-catch to test error cases
+        	try {
+        	//	dll.insertBefore(,);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("testSet index out of range");
+        	}
+        }
+       
+        
+        
+        
     }
 }
