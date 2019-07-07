@@ -501,6 +501,13 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
         	dll.insertBefore(2, dll.getNode(2));
         	assertEquals(dll.toString(), "[3, 9, 2, -4, 7]");
+        	assertEquals(dll.get(2), 2);
+        	// Asserting that a null node will return an error
+        	try {
+        		dll.insertBefore(2,  null);
+        	} catch (AssertionError e) {
+        		System.out.println("insertBefore cannot insert before a null node");
+        	}
         	
         }
         
@@ -510,7 +517,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
         	// Add some integers to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
-        	DLinkedList.Node n = dll.getNode(2);
+        	DLinkedList<Integer>.Node n = dll.getNode(2);
         	// Asserting that removeNode removes the correct node.
         	int data = dll.removeNode(n);
         	assertEquals(dll.toString(), "[3, 9, 7]");
