@@ -127,22 +127,27 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	
     	// Initialization of useful variable irev (used to determine which end node is closer to)
     	int irev = size - index - 1;
-    	
+    	System.out.println("irev: " + irev);
     	// Assertion that there is a node in DLL of index index.
     	if (irev < 0){ 				
     		throw new IndexOutOfBoundsException();
     	} 
-    	Node n = this.head;
+    	Node x = null;
     	if (irev > index) {  		// If index is closer to head, start from head
+    		Node n = this.head;
     		for (int j = 0; j < index; j++) {
     			n = n.succ;
     		}
+    		x = n;
     	} else { 					// Else, start from tail
+    		Node n = this.tail;
 			for (int j = 0; j < irev; j++) {
     			n = n.pred;
     		}
+			x = n;
     	}
-        return n;
+    	
+        return x;
     }
     
     /**
@@ -246,7 +251,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // have to be done here.
     	
     	Node node_after = getNode(index);
-    	insertBefore(element, node_after);
+    	System.out.println(node_after.data);
+    	this.insertBefore(element, node_after);
 
     }
     
@@ -393,7 +399,24 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	dll.add(9);
         	dll.add(11);
         	assertEquals(dll.toString(), "[3, 9, 11]");
-        }        
+        }
+        
+        /** Testing the getNode method */
+        @Test
+        public void testGetNode() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	dll.add(3);
+        	// Asserting that getNode method gives the correct node added
+        	assertEquals(dll.getNode(0).data, 3);
+        	assertEquals(dll.getNode(0).pred, null);
+        	assertEquals(dll.getNode(0).succ, null);
+        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	assertEquals(dll.getNode(3).data, -4);
+        	assertEquals(dll.getNode(3).pred, dll.getNode(2));
+        	assertEquals(dll.getNode(3).succ, dll.getNode(4));
+        	
+        	
+        }
         
         /** Testing the prepend method */
         @Test
@@ -411,12 +434,13 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         
         /** Testing the insertBefore method */
         @Test
-        public void testInsertBefore() {
+        public void testAddOverride() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
         	//Add some indexes to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
         	//Assert that putting a 5 before index 3 will return [3, 9, -4, 5, 7] 
-        	System.out.println(dll);
+        	dll.add(3, 5);
+        	assertEquals(dll.toString(), "[3, 9, -4, 5, 7]");
         	//assertEquals(dll.insertBefore(3), "[3, 9, -4, 5, 7]");
         	//Try-catch to test error cases
         	try {
