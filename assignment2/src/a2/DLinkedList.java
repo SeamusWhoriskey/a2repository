@@ -441,7 +441,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	
         }
         
-        /** Testing the insertBefore method */
+        /** Testing the add method override */
         @Test
         public void testAddOverride() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
@@ -450,13 +450,30 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	//Assert that putting a 5 before index 3 will return [3, 9, -4, 5, 7] 
         	dll.add(3, 5);
         	assertEquals(dll.toString(), "[3, 9, -4, 5, 7]");
-        	//assertEquals(dll.insertBefore(3), "[3, 9, -4, 5, 7]");
         	//Try-catch to test error cases
         	try {
-        	//	dll.insertBefore(,);
+        		dll.add(6, 5);
         	} catch (IndexOutOfBoundsException e) {
-        		System.out.println("testSet index out of range");
+        		System.out.println("testAddOverride index out of range");
         	}
+        }
+        
+        /** Testing the insertBefore method */
+        @Test
+        public void testInsertBefore() {
+        	
+        }
+        
+        /** Testing the removeNode method */
+        @Test
+        public void testRemoveNode() {
+        	
+        }
+        
+        /** Testing the remove method */
+        @Test
+        public void testRemove() {
+        	
         }
        
         
