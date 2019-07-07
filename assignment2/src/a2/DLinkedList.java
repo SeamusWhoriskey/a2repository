@@ -196,9 +196,10 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	if (this.size == 0) { 		// If the DLL is empty;
     		// Set this DLL's tail to be new_head as well
     		this.tail = new_head;
-    	}
+    	} else {
     	// Sets the predecessor of the old head to be the new head
     	this.head.pred = new_head;
+    	}
     	// Sets the head of the DLL as the new head
     	this.head = new_head;
     	
@@ -398,17 +399,14 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         @Test
         public void testPrepend() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	// Test that prepend method works on an empty dll
+        	dll.prepend(2);
         	//Add some indexes to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
-        	//Assert that putting a 4 in front of the DLinkedList will return [4, 3, 9, -4, 7]
-        	assertEquals(dll.prepend(4), "[4, 3, 9, -4, 7]");
-        	//Try-catch to test error cases
-        	try {
-        		dll = null;
-        		dll.prepend(-1);
-        	} catch (IndexOutOfBoundsException e) {
-        		System.out.println("testPrepend index out of range");
-        	}
+        	//Assert that using prepend(4) will insert a 4 at the front of the DLinkedList, which will then return [4, 2, 3, 9, -4, 7]
+        	dll.prepend(4);
+        	assertEquals(dll.toString(), "[4, 2, 3, 9, -4, 7]");
+        	
         }
         
         /** Testing the insertBefore method */
