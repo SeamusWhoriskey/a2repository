@@ -356,15 +356,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
          * @throws AssertionFailedError if the list is not well-formed
          */
         private static void assertInvariants(DLinkedList<?> list) {
-        	//Assert that the list contains [], which it should have even if empty
-        	assert (list.toString().contains("[") & list.toString().contains("]"));
-        	//Make sure the actual size is equivalent to the getter size
-            assert list.size == list.size();
-            //Make sure that head and tail are null at length 0, or has commas in between the entries otherwise
-            if (list.size == 0) {
-            	assert list.head == null & list.tail == null;
-            } else {
-            	assert list.toString().contains(", ");
+            // Testing that the invariant type remains the same for each node.
+            for (int k = 1; k < list.size; k++) {
+            	assertEquals(list.get(k).getClass(), list.get(k-1).getClass());
             }
         }
 
@@ -376,6 +370,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
             assertEquals("[Mike]", ll.toStringRev());
             assertEquals(1, ll.size());
             assertEquals(ll.tail, n);   
+            assertInvariants(ll);
         }
 
         /** Compare DLinkedList to standard library list */
@@ -400,6 +395,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
             dll.add(4); 
             dll.add(5);
             assertEquals(dll.toStringRev(), "[5, 4]");
+            assertInvariants(dll);
         }
         
         /** Testing get method */
@@ -413,6 +409,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (IndexOutOfBoundsException e) {
         		System.out.println("testGet index out of range");
         	}
+        	assertInvariants(dll);
         }
         
         /** Testing the set method */
@@ -427,6 +424,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (IndexOutOfBoundsException e) {
         		System.out.println("testSet index out of range");
         	}
+        	assertInvariants(dll);
         }
  
         /** Testing the add method */
@@ -441,6 +439,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	dll.add(9);
         	dll.add(11);
         	assertEquals(dll.toString(), "[3, 9, 11]");
+        	assertInvariants(dll);
         }
         
         /** Testing the getNode method */
@@ -467,8 +466,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (IndexOutOfBoundsException e) {
         		System.out.println("testGetNode index out of bounds exception");
         	}
-        	
-        	
+        	assertInvariants(dll);
         }
         
         /** Testing the prepend method */
@@ -482,7 +480,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	//Assert that using prepend(4) will insert a 4 at the front of the DLinkedList, which will then return [4, 2, 3, 9, -4, 7]
         	dll.prepend(4);
         	assertEquals(dll.toString(), "[4, 2, 3, 9, -4, 7]");
-        	
+        	assertInvariants(dll);
         }
         
         /** Testing the add method override */
@@ -500,6 +498,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (IndexOutOfBoundsException e) {
         		System.out.println("testAddOverride index out of range");
         	}
+        	assertInvariants(dll);
         }
         
         /** Testing the insertBefore method */
@@ -517,7 +516,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (AssertionError e) {
         		System.out.println("insertBefore cannot insert before a null node");
         	}
-        	
+        	assertInvariants(dll);
         }
         
         /** Testing the removeNode method */
@@ -543,7 +542,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (IndexOutOfBoundsException e) {
         		System.out.println("removeNode node given is not in the dll");
         	}
-        	
+        	assertInvariants(dll);
         }
         
         /** Testing the remove method */
@@ -560,6 +559,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	} catch (IndexOutOfBoundsException e) {
         		System.out.println("remove index is out of bounds");
         	}
+        	assertInvariants(dll);
         }
         
     }
