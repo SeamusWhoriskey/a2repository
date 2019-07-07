@@ -410,10 +410,21 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	assertEquals(dll.getNode(0).data, 3);
         	assertEquals(dll.getNode(0).pred, null);
         	assertEquals(dll.getNode(0).succ, null);
-        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	dll.add(5); dll.add(9); dll.add(-4); dll.add(7);
+        	// Asserting that getNode method gives the correct node when starting from the head
+        	assertEquals(dll.getNode(1).data, 5);
+        	assertEquals(dll.getNode(1).pred, dll.getNode(0));
+        	assertEquals(dll.getNode(1).succ, dll.getNode(2));
+        	// Asserting that getNode method gives the correct node when starting from the tail
         	assertEquals(dll.getNode(3).data, -4);
         	assertEquals(dll.getNode(3).pred, dll.getNode(2));
         	assertEquals(dll.getNode(3).succ, dll.getNode(4));
+        	// Asserting that an index out of bounds will throw an error
+        	try {
+        		dll.getNode(6);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("testGetNode index out of bounds exception");
+        	}
         	
         	
         }
