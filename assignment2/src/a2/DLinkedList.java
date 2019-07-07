@@ -382,21 +382,21 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
  
         /** Testing the add method */
         @Test
-        public void testadd() {
+        public void testAdd() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
         	//Add one number to the DLinkedList
         	dll.add(3);
         	//Assert that adding a 3 to an empty DLinkedList returns [3] 
-        	assertEquals(dll, "[3]");
+        	assertEquals(dll.toString(), "[3]");
         	//Check if add will extend the DLinkedList as specified
         	dll.add(9);
         	dll.add(11);
-        	assertEquals(dll, "[3, 9, 11]");
+        	assertEquals(dll.toString(), "[3, 9, 11]");
         }        
         
         /** Testing the prepend method */
         @Test
-        public void testprepend() {
+        public void testPrepend() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
         	//Add some indexes to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
@@ -407,13 +407,13 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         		dll = null;
         		dll.prepend(-1);
         	} catch (IndexOutOfBoundsException e) {
-        		System.out.println("testprepend index out of range");
+        		System.out.println("testPrepend index out of range");
         	}
         }
         
         /** Testing the insertBefore method */
         @Test
-        public void testinsertBefore() {
+        public void testInsertBefore() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
         	//Add some indexes to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
