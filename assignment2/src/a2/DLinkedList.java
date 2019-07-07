@@ -24,6 +24,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     public DLinkedList() {
     	// TODO item #1
         // Look at the class invariant to determine how to implement this.
+    	
+    	// Initialization of int size, Node head and Node tail.
     	this.size = 0;
     	this.head = null;
     	this.tail = null;
@@ -36,6 +38,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     public @Override int size() {
     	// TODO item #2
         // This is an extremely small method
+    	
+    	// returns the private int size
     	return this.size;
     }
 
@@ -89,17 +93,15 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	// Initializes the new tail as new_tail with this.tail as the predecessor, data of element e,  and no successor.
     	Node new_tail = new Node(this.tail, element, null);
     	
-    	if (this.size == 0) { 		// If the DLL is empty;
-    		// Set this DLL's head to be the new_tail
-    		this.head = new_tail;
-    	} else {
-    		// Sets the successor of the old tail to be the new tail
-        	this.tail.succ = new_tail;
+    	if (this.size == 0) { 			// If the DLL is empty,
+    		this.head = new_tail;		// Set this DLL's head to be the new_tail
+    	} else {						// Otherwise, we then know that this DLL is not empty, and we can then
+        	this.tail.succ = new_tail;	// set the successor of the old tail to be the new tail
     	}
     	
-    	// Sets the tail of the DLL as the new tail
+    	// Sets the tail of this DLL as the new tail
     	this.tail = new_tail;
-    	// Increases the size of the DLL by 1.
+    	// Increases the size of this DLL by 1.
     	this.size += 1;
     	return new_tail;
     }
@@ -111,8 +113,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // This is THE MOST IMPORTANT method to get right because it will be used
         // in nearly every test
     	
-    	// Use append() method to add element to the end of this list
-    	append(element);
+    	// Use append() method to add element to the right end of this list
+    	this.append(element);
         return true;
     }
     
@@ -132,28 +134,29 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // This MUST use the fastest way for index.
         // (If h is exactly the middle, then either way is ok.)
     	
-    	// Initialization of useful variable irev (used to determine which end node is closer to)
+    	// Initialization of useful variable irev (used to determine which end the index is closer to)
     	int irev = size - index - 1;
-    	// Assertion that there is a node in DLL of index index.
+    	// Assertion that there is a node in DLL with the index of int index.
     	if (irev < 0 || index < 0){ 				
-    		throw new IndexOutOfBoundsException();
+    		throw new IndexOutOfBoundsException();	// Throw an exception if index is not inbounds
     	} 
-    	Node x = null;
-    	if (irev > index) {  		// If index is closer to head, start from head
+    	Node node_out = null;
+    	if (irev > index) {  					// If index is closer to head, start from head
     		Node n = this.head;
-    		for (int j = 0; j < index; j++) {
+    		for (int j = 0; j < index; j++) {	// Cycle through each Node until the Node of index index is reached
     			n = n.succ;
     		}
-    		x = n;
-    	} else { 					// Else, start from tail
+    		node_out = n;
+    	} else { 								// Else, start from tail
     		Node n = this.tail;
-			for (int j = 0; j < irev; j++) {
+			for (int j = 0; j < irev; j++) {	// Cycle through each Node until the Node of index index is reached
     			n = n.pred;
     		}
-			x = n;
+			node_out = n;
     	}
     	
-        return x;
+    	// Returns the Node at index index.
+        return node_out;
     }
     
     /**
@@ -169,7 +172,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small.
         // Note that the helper method could throw the exception; doesn't
         // have to be done here.
-    	return getNode(index).data;
+    	
+    	// Uses the getNode method to return the Node at the given index.
+    	return this.getNode(index).data;
     }
     
     /**
@@ -187,8 +192,11 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small.
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
-    	E out = getNode(index).data;
-    	getNode(index).data = element;
+    	
+    	// Uses get method to find the data in the desired node
+    	E out = this.get(index);
+    	// Uses getNode method to change the data in the desired node
+    	this.getNode(index).data = element;
     	return out;
     }
     
@@ -205,16 +213,15 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	Node new_head = new Node(null, element, this.head);
     	
     	if (this.size == 0) { 		// If the DLL is empty;
-    		// Set this DLL's tail to be new_head as well
-    		this.tail = new_head;
-    	} else {
-    	// Sets the predecessor of the old head to be the new head
-    	this.head.pred = new_head;
+    		this.tail = new_head;	// Set this DLL's tail to be new_head as well
+    	} else {					// Otherwise, we know this DLL is not empty, and therefore we can then
+    	this.head.pred = new_head;	// set the predecessor of the old head to be the new head
     	}
-    	// Sets the head of the DLL as the new head
+    	
+    	// Sets the head of this DLL as the new head
     	this.head = new_head;
     	
-    	// Increases the size of the DLL by 1;
+    	// Increases the size of this DLL by 1;
     	this.size += 1;
     	return new_head;
     }
@@ -231,13 +238,19 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // This mid-size helper function will be used by other methods.
         // Do NOT test whether node is actually a Node of this list because
         // it will then not be a constant-time operation.
+    	
+    	// Assert that the node to add is not null
     	assert node != null;
-    	Node node_before = node.pred;
-    	Node new_node = new Node(node_before, element, node);
-    	node_before.succ = new_node;
+    	// Create a new node, new_node with the predecessor of new_node being the predecessor of node, data is element,
+    	// successor is node.
+    	Node new_node = new Node(node.pred, element, node);
+    	// Set the successor of the Node preceding node to be new_node
+    	node.pred.succ = new_node;
+    	// Set the preceding Node of node to be new_node
     	node.pred = new_node;
+    	// Increase the size of this DLL by 1.
     	this.size += 1;
-    	return node;
+    	return new_node;
     }
     
     /**
@@ -256,7 +269,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
     	
-    	Node node_after = getNode(index);
+    	// Create a node node_after to be used in the insertBefore method.
+    	Node node_after = this.getNode(index);
+    	// Use node_after to insert a new node of data element into this DLL.
     	this.insertBefore(element, node_after);
 
     }
@@ -270,17 +285,25 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private E removeNode(Node n) {
         // TODO item #12
         // This is a large helper method
+    	
+    	
+    	// One side note: the next 14 lines of code are unnecessary if removeNode is used exclusively as a
+    	// helper method for the below remove method, but in the case that one wants to use this method  
+    	// directly, these 14 lines ensure that there are no errors.
+    	
     	// Asserting that the node n is non-null
         assert n != null;
         // Determining if the node n is in this DLL
-        boolean nodeInL = false;
-        for (int i =0; i < size; i++) {
-        	if (n == this.getNode(i)) {
-        		nodeInL = true;
+        boolean nodeInL = false; 		
+        for (int i =0; i < size; i++) {	// For each possible index of this DLL,
+        	if (n == this.getNode(i)) {	// If Node n is equal to this.getNode for a specific index,
+        		nodeInL = true;			// change nodeInL to be true.
         	}
         }
-        if (nodeInL == false) {
+        if (nodeInL == false) {			// If Node n is not in the DLL, 
+        	// Print that the given node for removeNode is not in this DLL
         	System.out.println("Node is not in DLL for removeNode");
+        	// Throw an IndexOutOfBoundsException
         	throw new IndexOutOfBoundsException();
         }
         
@@ -302,7 +325,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Set the predecessor and successor of n to be null to remove it from the list fully (ensuring no errors).
         n.succ = null; n.pred = null;
         
-        
+        // Returns the element stored in Node n.
         return n.data;
     }
     
@@ -320,8 +343,12 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small.
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
+    	
+    	// Use getNode method to determine what Node to remove
     	Node n = this.getNode(i);
+    	// Remove Node n from the DLL, set E to be the data of node.
     	E data = this.removeNode(n);
+    	// Return the data in the removed node.
         return data;
     }
     
