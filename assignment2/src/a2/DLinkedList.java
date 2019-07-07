@@ -127,7 +127,6 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	
     	// Initialization of useful variable irev (used to determine which end node is closer to)
     	int irev = size - index - 1;
-    	System.out.println("irev: " + irev);
     	// Assertion that there is a node in DLL of index index.
     	if (irev < 0){ 				
     		throw new IndexOutOfBoundsException();
@@ -251,7 +250,6 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // have to be done here.
     	
     	Node node_after = getNode(index);
-    	System.out.println(node_after.data);
     	this.insertBefore(element, node_after);
 
     }
