@@ -128,7 +128,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     	// Initialization of useful variable irev (used to determine which end node is closer to)
     	int irev = size - index - 1;
     	// Assertion that there is a node in DLL of index index.
-    	if (irev < 0){ 				
+    	if (irev < 0 || index < 0){ 				
     		throw new IndexOutOfBoundsException();
     	} 
     	Node x = null;
@@ -263,7 +263,40 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     private E removeNode(Node n) {
         // TODO item #12
         // This is a large helper method
-        throw new NotImplementedError();  	    	
+    	// Asserting that the node n is non-null
+        assert n != null;
+        // Determining if the node n is in this DLL
+        boolean nodeInL = false;
+        for (int i =0; i < size; i++) {
+        	if (n == this.getNode(i)) {
+        		nodeInL = true;
+        	}
+        }
+        if (nodeInL == false) {
+        	System.out.println("Node is not in DLL for removeNode");
+        	throw new IndexOutOfBoundsException();
+        }
+        
+        // We now know that the node is non-null and in the DLL at index n_loc;
+        // Find the preceding and succeeding node using 
+       
+        if (n.pred != null) {			// If n is not the first node in the list, 
+        	n.pred.succ = n.succ;		// Set the preceding node's successor to be the successor of n.
+        } else {						// If n is the first node in the list (i.e. n is the head of this list),
+        	this.head = n.succ;			// Set the successor of n as the head of this list.
+        }
+        
+        if (n.succ != null) {			// If n is not the last node in the list,
+        	n.succ.pred = n.pred;		// Set the succeeding node's predecessor to be the predecessor of n.
+        } else {						// If n is the last node in the list (i.e. n is the tail of this list),
+        	this.tail = n.pred;			// Set the tail of this list as the predecessor of n.
+        }
+        
+        // Set the predecessor and successor of n to be null to remove it from the list fully (ensuring no errors).
+        n.succ = null; n.pred = null;
+        
+        
+        return n.data;
     }
     
     /**
@@ -280,7 +313,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         // Rely on helper methods to keep this method small.
         // Note that a helper method could throw the exception; doesn't
         // have to be done here.
-        throw new NotImplementedError();
+    	Node n = this.getNode(i);
+    	E data = this.removeNode(n);
+        return data;
     }
     
     ////////////////////////////////////////////////////////////////////////////
@@ -433,7 +468,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
         	// Test that prepend method works on an empty dll
         	dll.prepend(2);
-        	//Add some indexes to the DLinkedList
+        	//Add some integers to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
         	//Assert that using prepend(4) will insert a 4 at the front of the DLinkedList, which will then return [4, 2, 3, 9, -4, 7]
         	dll.prepend(4);
@@ -445,7 +480,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         @Test
         public void testAddOverride() {
         	DLinkedList<Integer> dll = new DLinkedList<Integer>();
-        	//Add some indexes to the DLinkedList
+        	//Add some integers to the DLinkedList
         	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
         	//Assert that putting a 5 before index 3 will return [3, 9, -4, 5, 7] 
         	dll.add(3, 5);
@@ -461,19 +496,54 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         /** Testing the insertBefore method */
         @Test
         public void testInsertBefore() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	//Add some integers to the DLinkedList
+        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	dll.insertBefore(2, dll.getNode(2));
+        	assertEquals(dll.toString(), "[3, 9, 2, -4, 7]");
         	
         }
         
         /** Testing the removeNode method */
         @Test
         public void testRemoveNode() {
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	// Add some integers to the DLinkedList
+        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	DLinkedList.Node n = dll.getNode(2);
+        	// Asserting that removeNode removes the correct node.
+        	int data = dll.removeNode(n);
+        	assertEquals(dll.toString(), "[3, 9, 7]");
+        	assertEquals(data, -4);
+        	// Asserting that removeNode will not run on a null node
+        	try {
+        		dll.removeNode(null);
+        	} catch (AssertionError e) {
+        		System.out.println("removeNode will not remove a null node");
+        	}
+        	// Asserting that removeNode will not run on a node not in dll
+        	try {
+        		dll.removeNode(n);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("removeNode node given is not in the dll");
+        	}
         	
         }
         
         /** Testing the remove method */
         @Test
         public void testRemove() {
-        	
+        	DLinkedList<Integer> dll = new DLinkedList<Integer>();
+        	// Add some integers to the DLinkedList
+        	dll.add(3); dll.add(9); dll.add(-4); dll.add(7);
+        	dll.remove(0);
+        	assertEquals(dll.toString(), "[9, -4, 7]");
+        	// Asserting that remove will not run if index is out of bounds of dll
+        	try {
+        		dll.remove(-1);
+        	} catch (IndexOutOfBoundsException e) {
+        		System.out.println("remove index is out of bounds");
+        	}
         }
        
         
