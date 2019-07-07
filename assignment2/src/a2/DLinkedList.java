@@ -356,7 +356,16 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
          * @throws AssertionFailedError if the list is not well-formed
          */
         private static void assertInvariants(DLinkedList<?> list) {
-            throw new NotImplementedError();
+        	//Assert that the list contains [], which it should have even if empty
+        	assert (list.toString().contains("[") & list.toString().contains("]"));
+        	//Make sure the actual size is equivalent to the getter size
+            assert list.size == list.size();
+            //Make sure that head and tail are null at length 0, or has commas in between the entries otherwise
+            if (list.size == 0) {
+            	assert list.head == null & list.tail == null;
+            } else {
+            	assert list.toString().contains(", ");
+            }
         }
 
         @Test
@@ -552,9 +561,7 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
         		System.out.println("remove index is out of bounds");
         	}
         }
-       
-        
-        
         
     }
+
 }
