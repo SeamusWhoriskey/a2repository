@@ -22,6 +22,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
     
     /** Constructor: an empty linked list. */
     public DLinkedList() {
+    	// TODO item #1
+        // Look at the class invariant to determine how to implement this.
     	this.size = 0;
     	this.head = null;
     	this.tail = null;
@@ -32,6 +34,8 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
      * This operation must take constant time.
      */
     public @Override int size() {
+    	// TODO item #2
+        // This is an extremely small method
     	return this.size;
     }
 
@@ -61,6 +65,9 @@ public class DLinkedList<E> extends java.util.AbstractList<E> {
      * For example, if this contains 6 3 8 in that order, the result is "[8, 3, 6]".
      */
     public String toStringRev() {
+    	// TODO item #3
+        // This should use field tail and the pred fields in nodes.
+        // Do NOT use field size.
     	String res= "[";
         // invariant: res = "[s0, s1, .., sk" where sk is the object after node n
         for (Node n = tail; n != null; n= n.pred) {
